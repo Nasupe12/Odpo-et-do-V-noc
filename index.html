@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odpocet do Vanoc</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .timer {
+            font-size: 2em;
+            padding: 20px;
+            background-color: #ffcccb;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="timer">
+    <h1>Odpocet do Vanoc</h1>
+    <p id="countdown"></p>
+</div>
+
+<script>
+    function updateCountdown() {
+        const christmas = new Date(new Date().getFullYear(), 11, 24, 23, 59, 59); // 24. prosince 23:59:59
+        const now = new Date();
+        const timeRemaining = christmas - now;
+
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = 
+            `${days} dni ${hours} hodin ${minutes} minut ${seconds} sekund`;
+
+        if (timeRemaining < 0) {
+            document.getElementById("countdown").innerHTML = "Stastné a vesele Vanoce!";
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
